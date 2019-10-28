@@ -81,34 +81,17 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        createShareIntent(this);
+        createShareIntent();
         return super.onOptionsItemSelected(item);
 
     }
 
-    private void createShareIntent(Context context) {
-        String text = SHARE_DESCRIPTION + mCandyImageUrl +  HASHTAG_CANDYCODED;
-
-        Intent share_intent=new Intent(Intent.ACTION_SEND);
-        share_intent.setType("text/plain");
-        share_intent.putExtra(Intent.EXTRA_TEXT, text);
-
-        try {
-            Intent chooserIntent = Intent.createChooser(share_intent, getString(R.string.share_it));
-            context.startActivity(chooserIntent);
-        } catch (ActivityNotFoundException ex) {
-            Toast.makeText(context, "Error: In picking the candy data", Toast.LENGTH_SHORT).show();
-        }
-
-
-
-
-
-
-
-
-
-
+    private void createShareIntent() {
+        Intent shareIntent=new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        String shareString = SHARE_DESCRIPTION + mCandyImageUrl +  HASHTAG_CANDYCODED;
+        shareIntent.putExtra(Intent.EXTRA_TEXT, shareString);
+        startActivity(shareIntent);
     }
 
 
