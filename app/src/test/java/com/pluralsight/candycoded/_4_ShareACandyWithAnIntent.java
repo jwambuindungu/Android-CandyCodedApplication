@@ -136,7 +136,7 @@ public class _4_ShareACandyWithAnIntent {
             //e.printStackTrace();
         }
 
-        assertNotNull("reateShareIntent() method doesn't exist in DetailActivity class.", myMethod);
+        assertNotNull("createShareIntent() method doesn't exist in DetailActivity class.", myMethod);
     }
 }
 

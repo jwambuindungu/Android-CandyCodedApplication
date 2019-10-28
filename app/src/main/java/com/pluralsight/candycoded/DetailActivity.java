@@ -1,5 +1,8 @@
 package com.pluralsight.candycoded;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,8 +10,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pluralsight.candycoded.DB.CandyContract;
 import com.pluralsight.candycoded.DB.CandyContract.CandyEntry;
@@ -71,4 +77,40 @@ public class DetailActivity extends AppCompatActivity {
     // ***
     // TODO - Task 4 - Share the Current Candy with an Intent
     // ***
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        createShareIntent(this);
+        return super.onOptionsItemSelected(item);
+
+    }
+
+    private void createShareIntent(Context context) {
+        String text = SHARE_DESCRIPTION + mCandyImageUrl +  HASHTAG_CANDYCODED;
+
+        Intent share_intent=new Intent(Intent.ACTION_SEND);
+        share_intent.setType("text/plain");
+        share_intent.putExtra(Intent.EXTRA_TEXT, text);
+
+        try {
+            Intent chooserIntent = Intent.createChooser(share_intent, getString(R.string.share_it));
+            context.startActivity(chooserIntent);
+        } catch (ActivityNotFoundException ex) {
+            Toast.makeText(context, "Error: In picking the candy data", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+
 }
